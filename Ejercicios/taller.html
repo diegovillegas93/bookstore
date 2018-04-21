@@ -23,7 +23,7 @@
                             <td>{{item.cedula}}</td>
                             <td>{{item.telefono}}</td>
                             <td>{{item.edad}}</td>
-                            <td  v-if="item.edad && item.edad>18">MAYOR DE EDAD</td>
+                            <td  v-if="item.edad && item.edad>=18">MAYOR DE EDAD</td>
                             <td  v-else-if="item.edad && item.edad<18">MENOR DE EDAD</td>
                            
                     </tr>
@@ -48,16 +48,16 @@
                 el:'main',
                 data:{
                     users:[
-                    {'nombre':null, 'apellido':null, 'cedula':null, 'telefono':null, 'edad':null}
+                    {'nombre':null, 'cedula':null, 'telefono':null, 'edad':null}
                     ],
-                    objUser:{'nombre':null, 'apellido':null, 'cedula':null, 'telefono':null, 'edad':null}
+                    objUser:{'nombre':null, 'cedula':null, 'telefono':null, 'edad':null}
                 },
                 methods:{
                     createUser(){
                         //Agrega obj al array pero no los inserta porque estan en null     
                         this.users.unshift(this.objUser);
                         //Se inicializa el ObjUser
-                        this.objUser={'nombre':null, 'apellido':null, 'cedula':null, 'telefono':null, 'edad':null}
+                        this.objUser={'nombre':null, 'cedula':null, 'telefono':null, 'edad':null}
                     }
                 },
                 computed:{

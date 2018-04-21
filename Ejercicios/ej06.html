@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue">
+        </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"    ></script>    </script>
+        <!-- import CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+        <!-- import JavaScript -->
+        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    </head>
+
+</html>
+<body>
+        <main>
+                <button @click="LoadData()">CARGAR</button>
+           <ol v-if="posts"> 
+                <li v-for="(post, idx) in posts">
+                        {{ post.title }}
+                </li>
+           </ol>
+           <span v-else>Esperando Datos</span>
+            {{ $data }}
+
+        </main>
+</body>
+<!--Este script es donde contedremos todos los componentes-->
+        <script type="text/javascript">
+
+
+
+            new Vue({
+                el:'main',
+                data:{
+                    posts:null
+                },
+                methods:{
+      //Consumiendo un web services              
+                    LoadData(){
+                        axios.get("https://jsonplaceholder.typicode.com/posts")
+                        .then((respuesta)=>{
+                            this.posts=respuesta.data;
+                            this.open3();
+                        });
+                    },
+
+                                    open3(){
+                    this.$notify({
+                        title: 'EXITO',
+                        message: 'Se cargo con exito!!!',
+                        type: 'success'
+
+                    });
+                }
+                }
+
+
+
+            });
+        </script>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue">
+        </script>
+    </head>
+
+</html>
+<body>
+        <main>
+            <table>
+                <thead>
+                        <th>Nombre</th>
+                        <th>Cedula</th>
+                        <th>Telefono</th>
+                        <th>Edad</th>
+                        <th>Condicion</th>
+                </thead>
+                <tbody> 
+ <!--Se ejecutan en tiempo de real : item - idx, como un id y los users-->                   
+                    <tr v-for="(item ,idx) in users">
+                            <td>{{item.nombre}}</td>
+                            <td>{{item.cedula}}</td>
+                            <td>{{item.telefono}}</td>
+                            <td>{{item.edad}}</td>
+                            <td  v-if="item.edad && item.edad>18">MAYOR DE EDAD</td>
+                            <td  v-else-if="item.edad && item.edad<18">MENOR DE EDAD</td>
+                           
+                    </tr>
+                </tbody>
+            </table>
+
+            <form @submit.prevent="createUser">
+<!--El v-model lo que hace es empatar o relacionar el objUser con las cajas de texto-->
+                <input type="text" placeholder="nombre" v-model="objUser.nombre"/>
+                <input type="text" placeholder="cedula" v-model="objUser.cedula"/>
+                <input type="text" placeholder="telefono" v-model="objUser.telefono"/>
+                <input type="text" placeholder="edad" v-model="objUser.edad"/>
+                <input type="submit" value="GUARDAR"/>
+            </form>
+            {{ $data }}
+
+        </main>
+</body>
+<!--Este script es donde contedremos todos los componentes-->
+        <script type="text/javascript">
+            new Vue({
+                el:'main',
+                data:{
+                    users:[
+                    {'nombre':null, 'apellido':null, 'cedula':null, 'telefono':null, 'edad':null}
+                    ],
+                    objUser:{'nombre':null, 'apellido':null, 'cedula':null, 'telefono':null, 'edad':null}
+                },
+                methods:{
+                    createUser(){
+                        //Agrega obj al array pero no los inserta porque estan en null     
+                        this.users.unshift(this.objUser);
+                        //Se inicializa el ObjUser
+                        this.objUser={'nombre':null, 'apellido':null, 'cedula':null, 'telefono':null, 'edad':null}
+                    }
+                },
+                computed:{
+                    orderUsers(){
+                        //Aqui se usa Sort que es un algoritmo estatico
+                        return this.users.sort(function(a,b){
+                            if(a.nombre > b.nombre){
+                                return 1;
+                            }
+                            if(a.nombre < b.nombre){
+                                return -1;
+                            }
+                            return 0;
+                        });
+                    }
+                }
+            });
+        </script>

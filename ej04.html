@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue">
+        </script>
+    </head>
+
+</html>
+<body>
+        <main>
+            <table>
+                <thead>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                </thead>
+                <tbody> 
+ <!--Se ejecutan en tiempo de real : item - idx, como un id y los users-->                   
+                    <tr v-for="(item ,idx) in users">
+                        <td>{{item.nombre}}</td>
+                        <td>{{item.apellido}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <form @submit.prevent="createUser">
+<!--El v-model lo que hace es empatar o relacionar el objUser con las cajas de texto-->
+                <input type="text" placeholder="nombre" v-model="objUser.nombre"/>
+                <input type="text" placeholder="apellido" v-model="objUser.apellido"/>
+                <input type="submit" value="GUARDAR"/>
+            </form>
+            {{ $data }}
+
+        </main>
+</body>
+<!--Este script es donde contedremos todos los componentes-->
+        <script type="text/javascript">
+            new Vue({
+                el:'main',
+                data:{
+                    users:[
+                        {'nombre':'Diego', 'apellido':'Villegas'},
+                        {'nombre':'Roberto', 'apellido':'Guambra'},
+                        {'nombre':'Odalis', 'apellido':'PilarPilar'}
+                    ],
+                    objUser:{'nombre':null, 'apellido':null}
+                },
+                methods:{
+                    createUser(){
+                        //Agrega obj al array pero no los inserta porque estan en null     
+                        this.users.unshift(this.objUser);
+                        //Se inicializa el ObjUser
+                        this.orderUsers;
+                        this.objUser={'nombre':null, 'apellido':null}
+                    }
+                },
+                computed:{
+                    orderUsers(){
+                        //Aqui se usa Sort que es un algoritmo estatico
+                        return this.users.sort(function(a,b){
+                            if(a.nombre > b.nombre){
+                                return 1;
+                            }
+                            if(a.nombre < b.nombre){
+                                return -1;
+                            }
+                            return 0;
+                        });
+                    }
+                }
+            });
+        </script>

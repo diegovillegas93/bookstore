@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue">
+        </script>
+    </head>
+
+</html>
+<body>
+        <main>
+            <h1>{{texto}}</h1>
+           <!--nos referimos a v-model enlaza el html con un data en tiempo real-->
+            <input type="text" v-model="texto"/>
+           <!--hace referencia e imprime los componentes -->
+            {{ $data }}
+            <!--doble llave y una variable imprime texto-->
+        </main>
+</body>
+<!--Este script es donde contedremos todos los componentes-->
+        <script type="text/javascript">
+            new Vue({
+                el:'main',
+                data:{
+                    texto:'hola mundo'
+                }
+            });
+        </script>

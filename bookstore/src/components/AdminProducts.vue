@@ -1,7 +1,12 @@
 <template>
-<h2>HOLA</h2>
+	<div>
+		<admin-products-form/>
+	</div>
 </template>
-
-<script>
-
+<script >
+	import AdminProductsForm from "@/components/AdminProductsForm"
+	export default{
+		components:{AdminProductsForm},
+		name:"admin-product"
+	}
 </script>

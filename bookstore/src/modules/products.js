@@ -23,6 +23,7 @@ export default{
 					.child(`products/${product.file_id}`).delete();
 		},
 		updateDeleteProduct({commit},id){
+            //cuando se pone "let" se refiere a una constante
 			let product= firebase.firestore().collection(`products`).doc(id);
 			if(product){
 				return product.update({
@@ -60,7 +61,7 @@ export default{
 		}
 
 	},
-	getters:{
+	getters:{ //hace un get si es v o f
 		productsDialog:(state)=>{
 			return state.admin.products.dialog;
 		},

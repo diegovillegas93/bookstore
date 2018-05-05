@@ -9,14 +9,18 @@ import AdminProducts from '@/components/AdminProducts'
 
 Vue.use(Router)
 
+
+
 import store from '@/store';
-const beforeEnter = (to, from, next) =>{
-  if (store.state.authModule.looged){
-    next({path:'/'});
-  }else{
+const beforeEnter = (to, from, next) => {
+  if (store.state.authModule.logged) {
+    next({path: '/'});
+  } else {
     next();
   }
 };
+
+
 const router = new Router({
   routes: [
     {
@@ -24,6 +28,12 @@ const router = new Router({
       name: 'home',
       component: Home,
       meta:{Auth:false, title:'Inicio'}
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: About,
+      meta:{Auth:false, title:'About'}
     },
      {
       path: '/register',
@@ -38,39 +48,32 @@ const router = new Router({
       component: Login,
       meta:{Auth:false, title:'Login'},
       beforeEnter: (to, from, next) => beforeEnter(to, from, next)
-
     },
     {
-      path: '/about',
-      name: 'About',
-      component: About,
-      meta: {Auth: false, tittle: 'About'}
-    },
-      {
       path:'/admin',
-      name:'/Admin',
-      component:'AdminHome',
-      meta:{Auth:true,title:'Administracion', 'role':'admin'},
+      name:'Admin',
+      component: AdminHome,
+      meta:{Auth:true,title:'Administracion','role':'admin' },
       children:[
-          {
+        {
           path:'products',
-          name: 'AdminProducts',
-          component: AdminProducts,
-          meta:{title:'Administrar Libros'},
-          }
-              ]
+          component:AdminProducts,
+          meta:{title:'Administrar Libros'}
+        }
+      ]
     }
   ]
 })
 
-router.beforeEach((to, from, next) =>{
-  document.tittle = to.meta.tittle;
-  if (to.meta.Auth && !store.state.authModule.logged && store.state.logged){
-    next({path:'/login'});
-  }else{
-    if (to.meta.role){
-      if (store.state.loaded && (to.meta.role !== store.authModule.role)){
-        next({path:'/'});
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title;
+  if (to.meta.Auth && !store.state.authModule.logged && store.state.loaded) {
+    next({path: '/login'});
+  } else {
+    if (to.meta.role) {
+      if (store.state.loaded && (to.meta.role !== store.state.authModule.role)) {
+        next({path: '/'});
         return;
       }
     }

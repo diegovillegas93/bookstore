@@ -2,7 +2,7 @@
   "name": "bookstore",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "diego.villegass@ug.edu.ec <diego.villegass@ug.edu.ec>",
+  "author": "ernesto.liberio@gmail.com <ernesto.liberio@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
